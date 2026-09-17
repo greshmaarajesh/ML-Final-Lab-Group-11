@@ -21,22 +21,39 @@ The project uses the UCI Bike Sharing Dataset to analyze historical bike demand 
 ## Project Workflow
 
 Dataset
+
 ↓
+
 Data Engineering
+
 ↓
+
 Data Analysis / EDA
+
 ↓
+
 Feature Engineering & Forecasting
+
 ↓
+
 Model Evaluation
+
 ↓
+
 Fleet Rebalancing Logic
+
 ↓
+
 ML Prediction Pipeline
+
 ↓
+
 Power BI Dashboard
+
 ↓
+
 Final Presentation
+
 
 ## Dataset
 
