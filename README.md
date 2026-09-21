@@ -110,44 +110,34 @@ These results are used to support fleet-rebalancing decisions.
 ## Project Structure
 G11_MetroTransit_Fleet/
 │
-├── 01_Data/
-│   ├── bike_sharing_dataset.csv        ← Teacher's original dataset
-│   └── cleaned_bike_data.csv           ← DE output
+├── Data/
+│   ├── Original_Dataset.csv
+│   └── Cleaned_Dataset.csv
 │
-├── 02_Data_Analyst/
-│   ├── EDA.ipynb
-│   ├── EDA_Report.pdf
-│   └── figures/
-│       ├── hourly_demand.png
-│       ├── demand_distribution.png
-│       ├── correlation_heatmap.png
-│       ├── peak_demand.png
-│       └── weather_vs_demand.png
+├── Data_Analysis/
+│   └── EDA.ipynb
 │
-├── 03_Data_Scientist/
-│   ├── forecasting_model.ipynb
-│   ├── train_model.py
-│   ├── model.pkl
-│   └── model_results.csv
+├── Forecasting/
+│   └── Forecasting_Model.ipynb
 │
-├── 04_Analytics_Engineer/
-│   ├── metrics_analysis.ipynb
-│   ├── rebalancing_logic.py
-│   └── decision_metrics.csv
+├── Analytics_Engineering/
+│   ├── Metrics_Analysis.ipynb
+│   ├── Rebalancing_Logic.py
+│   └── Decision_Metrics.csv
 │
-├── 05_ML_Engineer/
+├── ML_Pipeline/
 │   ├── predict.py
 │   ├── preprocessing.py
-│   ├── requirements.txt
-│   └── tests/
+│   ├── model.pkl
+│   └── requirements.txt
 │
-├── 06_BI/
-│   ├── MetroTransit_Fleet.pbix
-│   └── dashboard_data.csv
+├── Dashboard/
+│   └── MetroTransit_Fleet.pbix
 │
-├── 07_Documentation/
-│   ├── Project_Report.docx
-│   └── README.md
+├── Report/
+│   └── Project_Report.docx
 │
-└── 08_Presentation/
-    └── MetroTransit_Fleet_Presentation.pptx
+├── Presentation/
+│   └── MetroTransit_Fleet_Presentation.pptx
+│
+└── README.md
