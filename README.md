@@ -109,6 +109,7 @@ These results are used to support fleet-rebalancing decisions.
 
 ## Project Structure
 
+```text
 G11_MetroTransit_Fleet/
 │
 ├── Data/
@@ -142,3 +143,4 @@ G11_MetroTransit_Fleet/
 │   └── MetroTransit_Fleet_Presentation.pptx
 │
 └── README.md
+```
