@@ -108,36 +108,46 @@ Predicted demand is compared with available fleet capacity to identify potential
 These results are used to support fleet-rebalancing decisions.
 
 ## Project Structure
-
-ML-Final-Lab-Group-11/
+G11_MetroTransit_Fleet/
 │
-├── README.md
-├── requirements.txt
+├── 01_Data/
+│   ├── bike_sharing_dataset.csv        ← Teacher's original dataset
+│   └── cleaned_bike_data.csv           ← DE output
 │
-├── data/
-│   ├── raw/
-│   │   └── Original_Dataset.csv
-│   │
-│   └── processed/
-│       └── Cleaned_Dataset.csv
-│
-├── notebooks/
-│   ├── ML_Project.ipynb
+├── 02_Data_Analyst/
 │   ├── EDA.ipynb
-│   ├── Forecasting_Model.ipynb
-│   └── Metrics_Analysis.ipynb
+│   ├── EDA_Report.pdf
+│   └── figures/
+│       ├── hourly_demand.png
+│       ├── demand_distribution.png
+│       ├── correlation_heatmap.png
+│       ├── peak_demand.png
+│       └── weather_vs_demand.png
 │
-├── src/
-│   ├── preprocessing.py
-│   ├── model.py
+├── 03_Data_Scientist/
+│   ├── forecasting_model.ipynb
+│   ├── train_model.py
+│   ├── model.pkl
+│   └── model_results.csv
+│
+├── 04_Analytics_Engineer/
+│   ├── metrics_analysis.ipynb
+│   ├── rebalancing_logic.py
+│   └── decision_metrics.csv
+│
+├── 05_ML_Engineer/
 │   ├── predict.py
-│   └── Rebalancing_Logic.py
+│   ├── preprocessing.py
+│   ├── requirements.txt
+│   └── tests/
 │
-├── dashboard/
-│   └── Project_Dashboard.pbix
+├── 06_BI/
+│   ├── MetroTransit_Fleet.pbix
+│   └── dashboard_data.csv
 │
-├── report/
-│   └── Project_Report.pdf
+├── 07_Documentation/
+│   ├── Project_Report.docx
+│   └── README.md
 │
-└── presentation/
-    └── Client_Pitch.pptx
+└── 08_Presentation/
+    └── MetroTransit_Fleet_Presentation.pptx
