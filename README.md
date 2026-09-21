@@ -109,37 +109,35 @@ These results are used to support fleet-rebalancing decisions.
 
 ## Project Structure
 
-```text
-G11_MetroTransit_Fleet/
+ML-Final-Lab-Group-11/
 │
-├── Data/
-│   ├── Original_Dataset.csv
-│   └── Cleaned_Dataset.csv
+├── README.md
+├── requirements.txt
 │
-├── Data_Analysis/
-│   └── EDA.ipynb
+├── data/
+│   ├── raw/
+│   │   └── Original_Dataset.csv
+│   │
+│   └── processed/
+│       └── Cleaned_Dataset.csv
 │
-├── Forecasting/
-│   └── Forecasting_Model.ipynb
+├── notebooks/
+│   ├── ML_Project.ipynb
+│   ├── EDA.ipynb
+│   ├── Forecasting_Model.ipynb
+│   └── Metrics_Analysis.ipynb
 │
-├── Analytics_Engineering/
-│   ├── Metrics_Analysis.ipynb
-│   ├── Rebalancing_Logic.py
-│   └── Decision_Metrics.csv
-│
-├── ML_Pipeline/
-│   ├── predict.py
+├── src/
 │   ├── preprocessing.py
-│   ├── model.pkl
-│   └── requirements.txt
+│   ├── model.py
+│   ├── predict.py
+│   └── Rebalancing_Logic.py
 │
-├── Dashboard/
-│   └── MetroTransit_Fleet.pbix
+├── dashboard/
+│   └── Project_Dashboard.pbix
 │
-├── Report/
-│   └── Project_Report.docx
+├── report/
+│   └── Project_Report.pdf
 │
-├── Presentation/
-│   └── MetroTransit_Fleet_Presentation.pptx
-│
-└── README.md
+└── presentation/
+    └── Client_Pitch.pptx
