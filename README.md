@@ -1,113 +1,65 @@
-# ML_Group-11
-# MetroTransit Fleet – Smart Mobility
+# G11 MetroTransit Fleet
 
-## Project Overview
+## Forecasting Hourly Bike-Sharing Demand for Fleet Rebalancing
 
-G11 MetroTransit Fleet – Smart Mobility is a data analytics and machine learning project that forecasts hourly bike-sharing demand to support fleet rebalancing decisions.
+### Project Overview
 
-The project uses the UCI Bike Sharing Dataset to analyze historical bike demand based on factors such as hour, season, weather, temperature, humidity, working days, and holidays.
+**G11 MetroTransit Fleet** is a machine learning project focused on forecasting hourly bike-sharing demand to support efficient fleet management and rebalancing decisions.
 
-## Objectives
+The project uses the **UCI Bike Sharing Dataset** to analyze historical bike-sharing demand patterns, perform exploratory data analysis, develop a forecasting model, and use the predictions to support operational decision-making.
 
-- Analyze historical bike-sharing demand.
-- Identify hourly, seasonal, and weather-related demand patterns.
-- Perform exploratory data analysis (EDA).
-- Build a model to forecast hourly bike demand.
-- Evaluate predictions using RMSE, MAPE, and Hourly Peak Error.
-- Maintain time-series ordering and prevent future-data leakage.
-- Develop fleet-rebalancing decision logic.
-- Visualize results using Power BI.
+The project follows a structured workflow covering:
 
-## Project Workflow
+* Data preprocessing and cleaning
+* Exploratory Data Analysis (EDA)
+* Demand forecasting
+* Analytics engineering and decision metrics
+* Fleet rebalancing logic
+* Machine learning pipeline
+* Interactive dashboard
+* Project documentation and presentation
 
-Dataset
+---
 
-↓
+## Project Objectives
 
-Data Engineering
+The main objectives of this project are:
 
-↓
+1. Analyze historical bike-sharing demand patterns.
+2. Identify important factors affecting hourly bike demand.
+3. Forecast future hourly bike-sharing demand.
+4. Evaluate forecasting performance using suitable metrics.
+5. Identify peak-demand periods and potential demand anomalies.
+6. Support fleet rebalancing decisions using predicted demand.
+7. Present the analysis and results through a dashboard.
 
-Data Analysis / EDA
-
-↓
-
-Feature Engineering & Forecasting
-
-↓
-
-Model Evaluation
-
-↓
-
-Fleet Rebalancing Logic
-
-↓
-
-ML Prediction Pipeline
-
-↓
-
-Power BI Dashboard
-
-↓
-
-Final Presentation
-
+---
 
 ## Dataset
 
-The project uses the UCI Bike Sharing Dataset.
+The project uses the **UCI Bike Sharing Dataset**.
 
-### Important Variables
+The dataset contains information related to bike-sharing demand, including:
 
-| Variable | Description |
-|---|---|
-| `dteday` | Date |
-| `hr` | Hour |
-| `season` | Season |
-| `holiday` | Holiday indicator |
-| `weekday` | Day of the week |
-| `workingday` | Working/non-working day |
-| `weathersit` | Weather condition |
-| `temp` | Temperature |
-| `atemp` | Feeling temperature |
-| `hum` | Humidity |
-| `windspeed` | Wind speed |
-| `casual` | Casual users |
-| `registered` | Registered users |
-| `cnt` | Total bike demand |
+* Date and time
+* Season
+* Year
+* Month
+* Hour
+* Holiday
+* Working day
+* Weather situation
+* Temperature
+* Feeling temperature
+* Humidity
+* Windspeed
+* Bike rental counts
 
-The primary prediction target is `cnt`, representing total hourly bike demand.
+The cleaned dataset is used for analysis and forecasting.
 
-## Model Evaluation
+---
 
-The forecasting model is evaluated using:
-
-- **RMSE (Root Mean Squared Error)** – measures prediction error.
-- **MAPE (Mean Absolute Percentage Error)** – measures percentage error.
-- **Hourly Peak Error** – evaluates prediction performance during peak-demand hours.
-
-## Time-Series Validation
-
-The project follows strict temporal ordering during model validation.
-
-- Past data is used for training.
-- Later data is used for validation/testing.
-- Future information is not used to predict earlier periods.
-- Random splitting is avoided where it could cause data leakage.
-
-## Fleet Rebalancing
-
-Predicted demand is compared with available fleet capacity to identify potential:
-
-- Bike shortages
-- Bike surpluses
-- Normal-demand periods
-
-These results are used to support fleet-rebalancing decisions.
-
-## Project Structure
+## Repository Structure
 
 ```text
 G11_MetroTransit_Fleet/
@@ -129,7 +81,6 @@ G11_MetroTransit_Fleet/
 │
 ├── ML_Pipeline/
 │   ├── predict.py
-│   ├── preprocessing.py
 │   ├── model.pkl
 │   └── requirements.txt
 │
@@ -144,3 +95,63 @@ G11_MetroTransit_Fleet/
 │
 └── README.md
 ```
+
+---
+
+## Forecasting Methodology
+
+The project follows a **time-series-aware validation approach** to maintain the chronological order of the data.
+
+Future observations should not be used to train models for predicting earlier observations. This helps prevent **data leakage** and provides a more realistic evaluation of forecasting performance.
+
+The main evaluation metrics include:
+
+### RMSE
+
+**Root Mean Squared Error (RMSE)** measures the average magnitude of prediction errors while giving greater weight to larger errors.
+
+### MAPE
+
+**Mean Absolute Percentage Error (MAPE)** measures prediction error as a percentage of actual demand.
+
+### Hourly Peak Error
+
+This metric focuses specifically on forecasting performance during important high-demand periods.
+
+---
+
+## Expected Outcome
+
+The final project aims to provide a complete workflow from historical bike-sharing data to demand forecasting and fleet rebalancing support.
+
+The expected workflow is:
+
+```text
+Historical Bike-Sharing Data
+            ↓
+     Data Preprocessing
+            ↓
+ Exploratory Data Analysis
+            ↓
+   Feature Engineering
+            ↓
+   Demand Forecasting
+            ↓
+   Model Evaluation
+            ↓
+ Analytics Engineering
+            ↓
+ Rebalancing Logic
+            ↓
+ Operational Insights
+            ↓
+ Power BI Dashboard
+```
+
+---
+
+## Team
+
+**Group 11 – MetroTransit Fleet**
+
+The project is developed collaboratively by the members of Group 11, with different members contributing to data analysis, forecasting, analytics engineering, machine learning pipeline development, dashboard creation, documentation, and presentation.
