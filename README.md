@@ -2,28 +2,91 @@
 
 ## Forecasting Hourly Bike-Sharing Demand for Fleet Rebalancing
 
-### Project Overview
+---
 
-**G11 MetroTransit Fleet** is a machine learning project focused on forecasting hourly bike-sharing demand to support efficient fleet management and rebalancing decisions.
+## 1. Team & Member Roster
 
-The project uses the **UCI Bike Sharing Dataset** to analyze historical bike-sharing demand patterns, perform exploratory data analysis, develop a forecasting model, and use the predictions to support operational decision-making.
+### Group 11
 
-The project follows a structured workflow covering:
+**G11 MetroTransit Fleet**
 
-* Data preprocessing and cleaning
-* Exploratory Data Analysis (EDA)
-* Demand forecasting
-* Analytics engineering and decision metrics
-* Fleet rebalancing logic
-* Machine learning pipeline
-* Interactive dashboard
-* Project documentation and presentation
+### Team Members
+
+| Functional Role | Team Member | Core Responsibilities |
+|---|---|---|
+| **Data Engineer (DE)** | Varshitha K R | Data acquisition, validation, cleaning, preprocessing, data quality, and leakage prevention |
+| **Data Analyst (DA)** | Greshmaa Rajesh | Visual and statistical EDA, distribution and skewness analysis, correlation analysis, feature interactions, and actionable insights |
+| **Data Scientist (DS)** | A Merlin Levia | Model development, baseline comparison, algorithm selection, hyperparameter tuning, and cross-validation |
+| **Analytics Engineer (AE)** | Shiny Matilda K | Connecting cleaned data, model predictions, and business KPIs; developing decision metrics and rebalancing logic |
+| **ML Engineer (MLE)** | V Mounisha | Reproducible inference pipeline, prediction script, model management, dependencies, and pipeline testing |
+| **BI / Power BI Developer (BI)** | Angel Precilla A | Interactive Power BI dashboard, KPI visualization, operational insights, and dashboard usability |
 
 ---
 
-## Project Objectives
+## 2. Client Persona
 
-The main objectives of this project are:
+### Client
+
+**MetroTransit Fleet Management**
+
+### Client Persona
+
+The client is a **bike-sharing fleet management team** responsible for ensuring that bicycles are available when and where demand is high.
+
+The fleet management team needs to make operational decisions regarding:
+
+- When demand is expected to increase
+- When demand is expected to decrease
+- When bike shortages may occur
+- When bikes should be redistributed
+- How fleet resources can be allocated efficiently
+
+---
+
+## 3. Problem Statement
+
+Bike-sharing demand varies significantly depending on factors such as **hour, season, weather, temperature, humidity, working day, and holidays**.
+
+Without reliable demand forecasts, fleet operators may experience:
+
+- Bike shortages during high-demand periods
+- Excess bikes during low-demand periods
+- Inefficient fleet redistribution
+- Poor utilization of available bicycles
+
+### Project Problem
+
+> **Develop a machine learning-based forecasting solution to predict hourly bike-sharing demand and use the predictions to support fleet rebalancing decisions.**
+
+The project uses historical bike-sharing data to identify demand patterns, forecast future hourly demand, evaluate prediction performance, and generate operational insights for fleet management.
+
+---
+
+## 4. Dataset
+
+The project uses the **UCI Bike Sharing Dataset**.
+
+The dataset contains information related to bike-sharing demand, including:
+
+- Date and time
+- Season
+- Year
+- Month
+- Hour
+- Holiday
+- Working day
+- Weather situation
+- Temperature
+- Feeling temperature
+- Humidity
+- Windspeed
+- Bike rental counts
+
+The target variable for forecasting is **hourly bike rental demand (`cnt`)**.
+
+---
+
+## 5. Project Objectives
 
 1. Analyze historical bike-sharing demand patterns.
 2. Identify important factors affecting hourly bike demand.
@@ -31,37 +94,74 @@ The main objectives of this project are:
 4. Evaluate forecasting performance using suitable metrics.
 5. Identify peak-demand periods and potential demand anomalies.
 6. Support fleet rebalancing decisions using predicted demand.
-7. Present the analysis and results through a dashboard.
+7. Present the analysis and results through an interactive dashboard.
 
 ---
 
-## Dataset
+## 6. Primary Target Metric & Baseline Performance
 
-The project uses the **UCI Bike Sharing Dataset**.
+### Primary Target Metric
 
-The dataset contains information related to bike-sharing demand, including:
+The primary forecasting metric is:
 
-* Date and time
-* Season
-* Year
-* Month
-* Hour
-* Holiday
-* Working day
-* Weather situation
-* Temperature
-* Feeling temperature
-* Humidity
-* Windspeed
-* Bike rental counts
+**RMSE — Root Mean Squared Error**
 
-The cleaned dataset is used for analysis and forecasting.
+RMSE measures the magnitude of prediction errors and gives greater weight to larger errors.
+
+### Additional Evaluation Metrics
+
+The project also evaluates:
+
+- **MAPE — Mean Absolute Percentage Error**
+- **Hourly Peak Error**
+
+These metrics provide additional information about overall forecasting accuracy and performance during high-demand periods.
+
+### Baseline Performance
+
+The baseline model is used as the reference point for evaluating the forecasting models developed in the project.
+
+**Baseline Model:** Baseline forecasting model
+
+**Primary Metric:** RMSE
+
+**Baseline RMSE:** To be updated from the final model evaluation results
+
+**Baseline MAPE:** To be updated from the final model evaluation results
+
+**Baseline Hourly Peak Error:** To be updated from the final model evaluation results
 
 ---
+
+## 7. Methodology
+
+The project follows a time-series-aware machine learning workflow.
+
+```text
+Historical Bike-Sharing Data
+            ↓
+     Data Preprocessing
+            ↓
+ Exploratory Data Analysis
+            ↓
+   Feature Engineering
+            ↓
+   Demand Forecasting
+            ↓
+   Model Evaluation
+            ↓
+ Analytics Engineering
+            ↓
+ Rebalancing Logic
+            ↓
+ Operational Insights
+            ↓
+ Power BI Dashboard
 
 ## Repository Structure
 
 ```text
+
 G11_MetroTransit_Fleet/
 │
 ├── Data/
@@ -94,7 +194,7 @@ G11_MetroTransit_Fleet/
 │   └── MetroTransit_Fleet_Presentation.pptx
 │
 └── README.md
-```
+
 
 ---
 
