@@ -164,38 +164,33 @@ Historical Bike-Sharing Data
 
 G11_MetroTransit_Fleet/
 │
-├── Data/
-│   ├── Original_Dataset.csv
-│   └── Cleaned_Dataset.csv
+├── README.md
+├── requirements.txt
 │
-├── Data_Analysis/
-│   └── EDA.ipynb
+├── data/
+│   ├── raw/
+│   │   └── Original_Dataset.csv
+│   │
+│   └── processed/
+│       └── Cleaned_Dataset.csv
 │
-├── Forecasting/
-│   └── Forecasting_Model.ipynb
+├── notebooks/
+│   └── ML_Project.ipynb
 │
-├── Analytics_Engineering/
-│   ├── Metrics_Analysis.ipynb
-│   ├── Rebalancing_Logic.py
-│   └── Decision_Metrics.csv
+├── src/
+│   ├── preprocessing.py
+│   └── model.py
 │
-├── ML_Pipeline/
-│   ├── predict.py
-│   ├── model.pkl
-│   └── requirements.txt
+├── dashboard/
+│   └── Project_Dashboard.pbix
 │
-├── Dashboard/
-│   └── MetroTransit_Fleet.pbix
+├── report/
+│   └── Project_Report.pdf
 │
-├── Report/
-│   └── Project_Report.docx
-│
-├── Presentation/
-│   └── MetroTransit_Fleet_Presentation.pptx
-│
-└── README.md
+└── presentation/
+    └── Client_Pitch.pptx
 
-
+```text
 ---
 
 ## Forecasting Methodology
@@ -226,7 +221,7 @@ The final project aims to provide a complete workflow from historical bike-shari
 
 The expected workflow is:
 
-```text
+
 Historical Bike-Sharing Data
             ↓
      Data Preprocessing
