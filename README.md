@@ -160,7 +160,6 @@ Historical Bike-Sharing Data
 
 ## Repository Structure
 
-```text
 
 G11_MetroTransit_Fleet/
 │
@@ -191,6 +190,7 @@ G11_MetroTransit_Fleet/
     └── Client_Pitch.pptx
 
 ```text
+
 ---
 
 ## Forecasting Methodology
