@@ -1,145 +1,191 @@
-# ML_Group-11
-# MetroTransit Fleet – Smart Mobility
+# G11 MetroTransit Fleet
 
-## Project Overview
+## Forecasting Hourly Bike-Sharing Demand for Fleet Rebalancing
 
-G11 MetroTransit Fleet – Smart Mobility is a data analytics and machine learning project that forecasts hourly bike-sharing demand to support fleet rebalancing decisions.
+---
 
-The project uses the UCI Bike Sharing Dataset to analyze historical bike demand based on factors such as hour, season, weather, temperature, humidity, working days, and holidays.
+## 1. Team & Member Roster
 
-## Objectives
+### Group 11
 
-- Analyze historical bike-sharing demand.
-- Identify hourly, seasonal, and weather-related demand patterns.
-- Perform exploratory data analysis (EDA).
-- Build a model to forecast hourly bike demand.
-- Evaluate predictions using RMSE, MAPE, and Hourly Peak Error.
-- Maintain time-series ordering and prevent future-data leakage.
-- Develop fleet-rebalancing decision logic.
-- Visualize results using Power BI.
+**G11 MetroTransit Fleet**
 
-## Project Workflow
+### Team Members
 
-Dataset
+| Functional Role | Team Member | Core Responsibilities |
+|---|---|---|
+| **Data Engineer (DE)** | Varshitha K R | Data acquisition, validation, cleaning, preprocessing, data quality, and leakage prevention |
+| **Data Analyst (DA)** | Greshmaa Rajesh | Visual and statistical EDA, distribution and skewness analysis, correlation analysis, feature interactions, and actionable insights |
+| **Data Scientist (DS)** | A Merlin Levia | Model development, baseline comparison, algorithm selection, hyperparameter tuning, and cross-validation |
+| **Analytics Engineer (AE)** | Shiny Matilda K | Connecting cleaned data, model predictions, and business KPIs; developing decision metrics and rebalancing logic |
+| **ML Engineer (MLE)** | V Mounisha | Reproducible inference pipeline, prediction script, model management, dependencies, and pipeline testing |
+| **BI / Power BI Developer (BI)** | Angel Precilla A | Interactive Power BI dashboard, KPI visualization, operational insights, and dashboard usability |
 
+---
+
+## 2. Client Persona
+
+### Client
+
+**MetroTransit Fleet Management**
+
+### Client Persona
+
+The client is a **bike-sharing fleet management team** responsible for ensuring that bicycles are available when and where demand is high.
+
+The fleet management team needs to make operational decisions regarding:
+
+- When demand is expected to increase
+- When demand is expected to decrease
+- When bike shortages may occur
+- When bikes should be redistributed
+- How fleet resources can be allocated efficiently
+
+---
+
+## 3. Problem Statement
+
+Bike-sharing demand varies significantly depending on factors such as **hour, season, weather, temperature, humidity, working day, and holidays**.
+
+Without reliable demand forecasts, fleet operators may experience:
+
+- Bike shortages during high-demand periods
+- Excess bikes during low-demand periods
+- Inefficient fleet redistribution
+- Poor utilization of available bicycles
+
+### Project Problem
+
+> **Develop a machine learning-based forecasting solution to predict hourly bike-sharing demand and use the predictions to support fleet rebalancing decisions.**
+
+The project uses historical bike-sharing data to identify demand patterns, forecast future hourly demand, evaluate prediction performance, and generate operational insights for fleet management.
+
+---
+
+## 4. Dataset
+
+The project uses the **UCI Bike Sharing Dataset (hourly)**, containing 17,379 hourly records from 2011–2012.
+
+Key fields include:
+
+- Date and time
+- Season, Year, Month, Hour
+- Holiday, Working day
+- Weather situation, Temperature, Feeling temperature, Humidity, Windspeed
+- Bike rental counts (casual, registered, total)
+
+The target variable for forecasting is **hourly bike rental demand (`cnt`)**.
+
+---
+
+## 5. Project Objectives
+
+1. Analyze historical bike-sharing demand patterns.
+2. Identify important factors affecting hourly bike demand.
+3. Forecast future hourly bike-sharing demand.
+4. Evaluate forecasting performance using suitable metrics.
+5. Identify peak-demand periods and potential demand anomalies.
+6. Support fleet rebalancing decisions using predicted demand.
+7. Present the analysis and results through an interactive dashboard.
+
+---
+
+## 6. Primary Target Metric & Baseline Performance
+
+### Primary Target Metric
+
+**RMSE — Root Mean Squared Error**
+
+RMSE measures the magnitude of prediction errors and gives greater weight to larger errors, which matters here since large misses during peak hours are the most operationally costly.
+
+### Additional Evaluation Metrics
+
+- **R² — Coefficient of Determination**
+- **MAPE — Mean Absolute Percentage Error**
+- **Peak-Hour Error** (RMSE and MAPE restricted to the top 10% highest-demand hours)
+
+### Model & Baseline Performance
+
+**Model:** Random Forest Regressor, tuned via `GridSearchCV` with `TimeSeriesSplit` (5 folds), trained on a log-transformed target with cyclic hour/month feature engineering.
+
+**Evaluation set:** Chronological holdout of 3,476 hours (7 Aug – 31 Dec 2012), kept time-ordered relative to training to avoid future data leakage.
+
+| Metric | Overall | Peak-Demand Hours (top 10%) |
+|---|---|---|
+| RMSE | **88.76** | 181.86 |
+| R² | **0.838** | — |
+| MAPE | **32.85%** | 20.73% |
+
+**Rebalancing outcome:** Testing safety margins from 0% to 40%, a **35% safety margin** gave the lowest total modelled operational cost (**$358,217.50**), saving an estimated **41.5%** ($254,114.75) compared with a 0% margin over the 147-day holdout period.
+
+---
+
+## 7. Methodology
+
+The project follows a time-series-aware machine learning workflow:
+```
+Historical Bike-Sharing Data
 ↓
-
-Data Engineering
-
+Data Preprocessing
 ↓
-
-Data Analysis / EDA
-
+Exploratory Data Analysis
 ↓
-
-Feature Engineering & Forecasting
-
+Feature Engineering
 ↓
-
+Demand Forecasting
+↓
 Model Evaluation
-
 ↓
-
-Fleet Rebalancing Logic
-
+Analytics Engineering
 ↓
-
-ML Prediction Pipeline
-
+Rebalancing Logic
 ↓
-
+Operational Insights
+↓
 Power BI Dashboard
+```
 
-↓
+The project follows a **time-series-aware validation approach** to maintain the chronological order of the data. Future observations are not used to train models for predicting earlier observations, which prevents **data leakage** and gives a more realistic evaluation of forecasting performance.
 
-Final Presentation
+---
 
-
-## Dataset
-
-The project uses the UCI Bike Sharing Dataset.
-
-### Important Variables
-
-| Variable | Description |
-|---|---|
-| `dteday` | Date |
-| `hr` | Hour |
-| `season` | Season |
-| `holiday` | Holiday indicator |
-| `weekday` | Day of the week |
-| `workingday` | Working/non-working day |
-| `weathersit` | Weather condition |
-| `temp` | Temperature |
-| `atemp` | Feeling temperature |
-| `hum` | Humidity |
-| `windspeed` | Wind speed |
-| `casual` | Casual users |
-| `registered` | Registered users |
-| `cnt` | Total bike demand |
-
-The primary prediction target is `cnt`, representing total hourly bike demand.
-
-## Model Evaluation
-
-The forecasting model is evaluated using:
-
-- **RMSE (Root Mean Squared Error)** – measures prediction error.
-- **MAPE (Mean Absolute Percentage Error)** – measures percentage error.
-- **Hourly Peak Error** – evaluates prediction performance during peak-demand hours.
-
-## Time-Series Validation
-
-The project follows strict temporal ordering during model validation.
-
-- Past data is used for training.
-- Later data is used for validation/testing.
-- Future information is not used to predict earlier periods.
-- Random splitting is avoided where it could cause data leakage.
-
-## Fleet Rebalancing
-
-Predicted demand is compared with available fleet capacity to identify potential:
-
-- Bike shortages
-- Bike surpluses
-- Normal-demand periods
-
-These results are used to support fleet-rebalancing decisions.
-
-## Project Structure
-
-```text
-G11_MetroTransit_Fleet/
+## 8. Repository Structure
+```
+ML-Final-Lab-Group-11/
 │
-├── Data/
-│   ├── Original_Dataset.csv
-│   └── Cleaned_Dataset.csv
+├── README.md
+├── requirements.txt
 │
-├── Data_Analysis/
-│   └── EDA.ipynb
+├── cleaned_bike_sharing.csv
+├── Holdout_Predictions.csv
+├── Decision_Metrics.csv
 │
-├── Forecasting/
-│   └── Forecasting_Model.ipynb
+├── data/
+│ ├── processed/
+│   └──cleaned_bike_sharing.csv
+│ ├── raw/
+│   └──hour.csv
+│ 
+├── notebooks/
+│ └──EDA.ipynb
+│ └──ML_Project .ipynb
+│ └──Metrics_Analysis.ipynb
+│ └──Preprocessing (1).ipynb
+│ └──Rebalancing_Logic.py
+│ └──_Forecasting_Model_.ipynb
+│ └──_Predict.py
+
+cleaned_bike_sharing.csv
 │
-├── Analytics_Engineering/
-│   ├── Metrics_Analysis.ipynb
-│   ├── Rebalancing_Logic.py
-│   └── Decision_Metrics.csv
+├── src/
+│ └── (supporting scripts, if any)
 │
-├── ML_Pipeline/
-│   ├── predict.py
-│   ├── preprocessing.py
-│   ├── model.pkl
-│   └── requirements.txt
+├── dashboard/
+│ └── metrotransit fleet.pbix
 │
-├── Dashboard/
-│   └── MetroTransit_Fleet.pbix
+├── report/
+│ └── MetroTransit_Fleet_Project_Report.docx
 │
-├── Report/
-│   └── Project_Report.docx
-│
-├── Presentation/
-│   └── MetroTransit_Fleet_Presentation.pptx
-│
-└── README.md
+└── presentation/
+└── Client_Pitch.pptx
+```
