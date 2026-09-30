@@ -64,23 +64,15 @@ The project uses historical bike-sharing data to identify demand patterns, forec
 
 ## 4. Dataset
 
-The project uses the **UCI Bike Sharing Dataset**.
+The project uses the **UCI Bike Sharing Dataset (hourly)**, containing 17,379 hourly records from 2011–2012.
 
-The dataset contains information related to bike-sharing demand, including:
+Key fields include:
 
 - Date and time
-- Season
-- Year
-- Month
-- Hour
-- Holiday
-- Working day
-- Weather situation
-- Temperature
-- Feeling temperature
-- Humidity
-- Windspeed
-- Bike rental counts
+- Season, Year, Month, Hour
+- Holiday, Working day
+- Weather situation, Temperature, Feeling temperature, Humidity, Windspeed
+- Bike rental counts (casual, registered, total)
 
 The target variable for forecasting is **hourly bike rental demand (`cnt`)**.
 
@@ -102,151 +94,98 @@ The target variable for forecasting is **hourly bike rental demand (`cnt`)**.
 
 ### Primary Target Metric
 
-The primary forecasting metric is:
-
 **RMSE — Root Mean Squared Error**
 
-RMSE measures the magnitude of prediction errors and gives greater weight to larger errors.
+RMSE measures the magnitude of prediction errors and gives greater weight to larger errors, which matters here since large misses during peak hours are the most operationally costly.
 
 ### Additional Evaluation Metrics
 
-The project also evaluates:
-
+- **R² — Coefficient of Determination**
 - **MAPE — Mean Absolute Percentage Error**
-- **Hourly Peak Error**
+- **Peak-Hour Error** (RMSE and MAPE restricted to the top 10% highest-demand hours)
 
-These metrics provide additional information about overall forecasting accuracy and performance during high-demand periods.
+### Model & Baseline Performance
 
-### Baseline Performance
+**Model:** Random Forest Regressor, tuned via `GridSearchCV` with `TimeSeriesSplit` (5 folds), trained on a log-transformed target with cyclic hour/month feature engineering.
 
-The baseline model is used as the reference point for evaluating the forecasting models developed in the project.
+**Evaluation set:** Chronological holdout of 3,476 hours (7 Aug – 31 Dec 2012), kept time-ordered relative to training to avoid future data leakage.
 
-**Baseline Model:** Baseline forecasting model
+| Metric | Overall | Peak-Demand Hours (top 10%) |
+|---|---|---|
+| RMSE | **88.76** | 181.86 |
+| R² | **0.838** | — |
+| MAPE | **32.85%** | 20.73% |
 
-**Primary Metric:** RMSE
-
-**Baseline RMSE:** To be updated from the final model evaluation results
-
-**Baseline MAPE:** To be updated from the final model evaluation results
-
-**Baseline Hourly Peak Error:** To be updated from the final model evaluation results
+**Rebalancing outcome:** Testing safety margins from 0% to 40%, a **35% safety margin** gave the lowest total modelled operational cost (**$358,217.50**), saving an estimated **41.5%** ($254,114.75) compared with a 0% margin over the 147-day holdout period.
 
 ---
 
 ## 7. Methodology
 
-The project follows a time-series-aware machine learning workflow.
-
-```text
+The project follows a time-series-aware machine learning workflow:
+```
 Historical Bike-Sharing Data
-            ↓
-     Data Preprocessing
-            ↓
- Exploratory Data Analysis
-            ↓
-   Feature Engineering
-            ↓
-   Demand Forecasting
-            ↓
-   Model Evaluation
-            ↓
- Analytics Engineering
-            ↓
- Rebalancing Logic
-            ↓
- Operational Insights
-            ↓
- Power BI Dashboard
+↓
+Data Preprocessing
+↓
+Exploratory Data Analysis
+↓
+Feature Engineering
+↓
+Demand Forecasting
+↓
+Model Evaluation
+↓
+Analytics Engineering
+↓
+Rebalancing Logic
+↓
+Operational Insights
+↓
+Power BI Dashboard
+```
 
-## Repository Structure
+The project follows a **time-series-aware validation approach** to maintain the chronological order of the data. Future observations are not used to train models for predicting earlier observations, which prevents **data leakage** and gives a more realistic evaluation of forecasting performance.
 
+---
 
-G11_MetroTransit_Fleet/
+## 8. Repository Structure
+```
+ML-Final-Lab-Group-11/
 │
 ├── README.md
 ├── requirements.txt
 │
-├── data/
-│   ├── raw/
-│   │   └── Original_Dataset.csv
-│   │
-│   └── processed/
-│       └── Cleaned_Dataset.csv
+├── cleaned_bike_sharing.csv
+├── Holdout_Predictions.csv
+├── Decision_Metrics.csv
 │
+├── data/
+│ ├── processed/
+│   └──cleaned_bike_sharing.csv
+│ ├── raw/
+│   └──hour.csv
+│ 
 ├── notebooks/
-│   └── ML_Project.ipynb
+│ └──EDA.ipynb
+│ └──ML_Project .ipynb
+│ └──Metrics_Analysis.ipynb
+│ └──Preprocessing (1).ipynb
+│ └──Rebalancing_Logic.py
+│ └──_Forecasting_Model_.ipynb
+│ └──_Predict.py
+
+cleaned_bike_sharing.csv
 │
 ├── src/
-│   ├── preprocessing.py
-│   └── model.py
+│ └── (supporting scripts, if any)
 │
 ├── dashboard/
-│   └── Project_Dashboard.pbix
+│ └── metrotransit fleet.pbix
 │
 ├── report/
-│   └── Project_Report.pdf
+│ └── MetroTransit_Fleet_Project_Report.docx
 │
 └── presentation/
-    └── Client_Pitch.pptx
-
-```text
-
----
-
-## Forecasting Methodology
-
-The project follows a **time-series-aware validation approach** to maintain the chronological order of the data.
-
-Future observations should not be used to train models for predicting earlier observations. This helps prevent **data leakage** and provides a more realistic evaluation of forecasting performance.
-
-The main evaluation metrics include:
-
-### RMSE
-
-**Root Mean Squared Error (RMSE)** measures the average magnitude of prediction errors while giving greater weight to larger errors.
-
-### MAPE
-
-**Mean Absolute Percentage Error (MAPE)** measures prediction error as a percentage of actual demand.
-
-### Hourly Peak Error
-
-This metric focuses specifically on forecasting performance during important high-demand periods.
-
----
-
-## Expected Outcome
-
-The final project aims to provide a complete workflow from historical bike-sharing data to demand forecasting and fleet rebalancing support.
-
-The expected workflow is:
-
-
-Historical Bike-Sharing Data
-            ↓
-     Data Preprocessing
-            ↓
- Exploratory Data Analysis
-            ↓
-   Feature Engineering
-            ↓
-   Demand Forecasting
-            ↓
-   Model Evaluation
-            ↓
- Analytics Engineering
-            ↓
- Rebalancing Logic
-            ↓
- Operational Insights
-            ↓
- Power BI Dashboard
+└── Client_Pitch.pptx
 ```
-
----
-
-## Team
-
-**Group 11 – MetroTransit Fleet**
-
-The project is developed collaboratively by the members of Group 11, with different members contributing to data analysis, forecasting, analytics engineering, machine learning pipeline development, dashboard creation, documentation, and presentation.
